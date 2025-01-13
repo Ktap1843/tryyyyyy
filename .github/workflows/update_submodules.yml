@@ -16,12 +16,10 @@ jobs:
           submodules: true                # Включить подмодули
           fetch-depth: 0
 
-      - name: Setup Git Credentials
+      - name: Setup Git Config
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          echo "https://${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
-          git config --global credential.helper store
 
       - name: Update Submodules
         run: |
