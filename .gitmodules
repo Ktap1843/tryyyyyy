@@ -1,0 +1,6 @@
+[submodule "PYwork/try"]
+	path = PYwork/try
+	url = https://github.com/Ktap1843/2g2
+[submodule "2g2"]
+	path = 2g2
+	url = https://github.com/Ktap1843/2g2
