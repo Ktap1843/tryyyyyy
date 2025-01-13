@@ -26,4 +26,5 @@ jobs:
           git submodule update --remote
           git add .
           git commit -m "Автоматическое обновление подмодулей" || echo "No changes to commit"
-          git push origin HEAD
+          git pull --rebase origin master  # Синхронизация с удалённой веткой
+          git push origin master
