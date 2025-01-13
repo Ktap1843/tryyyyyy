@@ -2,7 +2,7 @@ name: Update Submodules
 
 on:
   schedule:
-    - cron: "*/* * * * *"  # Проверка каждые 10 минут
+    - cron: "*/5 * * * *"  # Проверка каждые 10 минут
 
 jobs:
   update-submodules:
