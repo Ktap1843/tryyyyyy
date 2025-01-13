@@ -2,8 +2,8 @@ name: Update Submodules
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # Проверка каждые 10 минут
-  workflow_dispatch:       # Добавлен ручной запуск
+    - cron: "*/5 * * * *"  # Запуск каждые 10 минут
+  workflow_dispatch:       # Ручной запуск
 
 jobs:
   update-submodules:
@@ -12,11 +12,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          submodules: true  # Включить подмодули
+          token: ${{ secrets.GH_TOKEN }}  # Использование токена для работы с приватными репозиториями
+          submodules: true                # Включить подмодули
+          fetch-depth: 0
+
+      - name: Setup Git Credentials
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "https://${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          git config --global credential.helper store
 
       - name: Update Submodules
         run: |
           git submodule update --remote
           git add .
-          git commit -m "Автоматическое обновление подмодулей" || echo "No changes"
-          git push
+          git commit -m "Автоматическое обновление подмодулей" || echo "No changes to commit"
+          git push origin main
